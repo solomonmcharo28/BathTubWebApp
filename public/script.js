@@ -26,12 +26,12 @@ try {
 	const result = await response.text();
 	//console.log(result);
 } catch (error) {
-	console.error(error);
+	//console.error(error);
 }
 })();
 
   function getMoonPhase(lat, lon) {
-    console.log("moonphase request made");
+    //console.log("moonphase request made");
     var url =
       "https://" +
       'moon-phase.p.rapidapi.com' +
@@ -79,7 +79,7 @@ function geocodeWithMapbox(address) {
       }
 
       // Mapbox returns [longitude, latitude]
-      console.log(data);
+      //console.log(data);
       var center = data.features[0].center;
       return {
         place_name: data.features[0].place_name,
@@ -126,11 +126,11 @@ function geocodeWithMapbox(address) {
     form.addEventListener("submit", async (e) => {
         e.preventDefault();  
         const address = document.getElementById("address").value;
-        console.log("Address Response", address);
+        //console.log("Address Response", address);
 
         const locationData = await geocodeWithMapbox(address)
         .then(function (data) {
-        console.log("Location response:", data);
+        //console.log("Location response:", data);
         // If you have a <pre id="result"></pre> in HTML:
         var el = document.getElementById("result");
         if (el) el.textContent = JSON.stringify(data.place_name, null, 2).replace(/["']/g, "");
@@ -139,14 +139,14 @@ function geocodeWithMapbox(address) {
         return data;
         })
         .catch(function (err) {
-        console.error("Error:", err.message);
+        //console.error("Error:", err.message);
         });;
-        console.log("Location API Response", locationData);
+        //console.log("Location API Response", locationData);
 
         await getMoonPhase(locationData.lat, locationData.lon)
         .then(function (data) {
-		console.log("Location API response:", locationData);
-        console.log("Moon API response:", data);
+		//console.log("Location API response:", locationData);
+        //console.log("Moon API response:", data);
         var solarTimestamp = data.sun.next_solar_eclipse.timestamp;
         const theDate = new Date(solarTimestamp * 1000);
         var lunarTimestamp = data.moon.next_lunar_eclipse.timestamp;
@@ -181,13 +181,9 @@ function geocodeWithMapbox(address) {
         if (el) el.textContent += "My Local Time: ";
         if (el) el.textContent += theDate2.toLocaleString();
 		if (el) el.textContent += "\n";
-        if (el) el.textContent += data.location.latitude;
-        if (el) el.textContent += "\n";
-        if (el) el.textContent += data.location.longitude;
-        if (el) el.textContent += "\n";
         })
         .catch(function (err) {
-        console.error("Error:", err.message);
+        //console.error("Error:", err.message);
         });;
 
 
