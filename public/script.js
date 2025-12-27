@@ -1,8 +1,15 @@
-const config = await fetch("/api/config").then(r => r.json());
+var moonPhaseToken = null;
+var mapboxToken = null;
 
-var moonPhaseToken =  config.moonPhaseToken;
-var mapboxToken = config.mapboxToken;
+async function loadConfig() {
+  const res = await fetch("/api/config");
+  const config = await res.json();
 
+  moonPhaseToken = config.moonPhaseToken;
+  mapboxToken    = config.mapboxToken;
+
+}
+loadConfig();
 
 (async function getMoonPhaseFast() {
 const url = 'https://moon-phase.p.rapidapi.com/calendar?format=html';
