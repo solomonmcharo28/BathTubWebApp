@@ -3,7 +3,7 @@ const url = 'https://moon-phase.p.rapidapi.com/calendar?format=html';
 const options = {
 	method: 'GET',
 	headers: {
-		'x-rapidapi-key': process.env,moonPhaseToken,
+		'x-rapidapi-key': process.env.moonPhaseToken,
 		'x-rapidapi-host': 'moon-phase.p.rapidapi.com'
 	}
 };
