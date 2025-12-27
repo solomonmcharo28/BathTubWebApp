@@ -1,9 +1,13 @@
+var moonPhaseToken =  process.env.moonPhaseToken;
+var mapboxToken = process.env.mapboxToken;
+
+
 (async function getMoonPhaseFast() {
 const url = 'https://moon-phase.p.rapidapi.com/calendar?format=html';
 const options = {
 	method: 'GET',
 	headers: {
-		'x-rapidapi-key': process.env.moonPhaseToken,
+		'x-rapidapi-key': moonPhaseToken,
 		'x-rapidapi-host': 'moon-phase.p.rapidapi.com'
 	}
 };
@@ -18,6 +22,7 @@ try {
 })();
 
   function getMoonPhase(lat, lon) {
+    console.log("moonphase request made");
     var url =
       "https://" +
       'moon-phase.p.rapidapi.com' +
@@ -29,7 +34,7 @@ try {
     return fetch(url, {
       method: "GET",
       headers: {
-        "X-RapidAPI-Key": process.env.moonPhaseToken,
+        "X-RapidAPI-Key": moonPhaseToken,
         "X-RapidAPI-Host":'moon-phase.p.rapidapi.com',
       },
     }).then(function (res) {
@@ -47,7 +52,7 @@ function geocodeWithMapbox(address) {
     "https://api.mapbox.com/geocoding/v5/mapbox.places/" +
     encodeURIComponent(address) +
     ".json?access_token=" +
-    encodeURIComponent(process.env.mapboxToken) +
+    encodeURIComponent(mapboxToken) +
     "&limit=1";
 
   return fetch(url)
@@ -77,6 +82,7 @@ function geocodeWithMapbox(address) {
 }
 
   // Example: exactly your URL values
+   /*
   getMoonPhase(51.4826, 0.0077)
     .then(function (data) {
       console.log("Moon API response:", data);
@@ -88,10 +94,10 @@ function geocodeWithMapbox(address) {
     .catch(function (err) {
       console.error("Error:", err.message);
     });
+*/
 
 
-
-    geocodeWithMapbox("Wundanyi")
+ /* geocodeWithMapbox("Wundanyi")
     .then(function (data) {
         console.log("Location response:", data);
         // If you have a <pre id="result"></pre> in HTML:
@@ -100,7 +106,8 @@ function geocodeWithMapbox(address) {
         })
         .catch(function (err) {
         console.error("Error:", err.message);
-        });
+        });  
+*/
 
 (async function () {
  const form = document.getElementById("moonForm");
@@ -109,11 +116,50 @@ function geocodeWithMapbox(address) {
 
     form.addEventListener("submit", async (e) => {
         e.preventDefault();  
-         const address = document.getElementById("address").value;
-          console.log("Address Response", address);
-        const locationData = await geocodeWithMapbox(address);
+        const address = document.getElementById("address").value;
+        console.log("Address Response", address);
+
+        const locationData = await geocodeWithMapbox(address)
+        .then(function (data) {
+        console.log("Location response:", data);
+        // If you have a <pre id="result"></pre> in HTML:
+        var el = document.getElementById("result");
+        if (el) el.textContent = JSON.stringify(data.place_name, null, 2).replace(/["']/g, "");
+        if (el) el.textContent += "\n";
+        //if (el) el.textContent += JSON.stringify(data, null, 2).replace(/["']/g, "");
+        return data;
+        })
+        .catch(function (err) {
+        console.error("Error:", err.message);
+        });;
         console.log("Location API Response", locationData);
-         getMoonPhase(locationData.lat, locationData.lon);
+
+        await getMoonPhase(locationData.lat, locationData.lon)
+        .then(function (data) {
+        console.log("Moon API response:", data);
+        var solarTimestamp = data.sun.next_solar_eclipse.timestamp;
+        const theDate = new Date(solarTimestamp * 1000);
+        var lunarTimestamp = data.moon.next_lunar_eclipse.timestamp;
+        const theDate2 = new Date(lunarTimestamp * 1000)
+        // If you have a <pre id="result"></pre> in HTML:
+        var el = document.getElementById("result");
+        if (el) el.textContent += JSON.stringify(data.sun.next_solar_eclipse.type, null, 2).replace(/["']/g, "");
+        if (el) el.textContent += "\n";
+        if (el) el.textContent += JSON.stringify(data.sun.next_solar_eclipse.datestamp, null, 2).replace(/["']/g, "");
+        if (el) el.textContent += "\n";
+        if (el) el.textContent += "My Local Time: ";
+        if (el) el.textContent += theDate.toLocaleString();
+        if (el) el.textContent += "\n";
+        if (el) el.textContent += JSON.stringify(data.moon.next_lunar_eclipse.type, null, 2).replace(/["']/g, "");
+        if (el) el.textContent += "\n";
+        if (el) el.textContent += JSON.stringify(data.moon.next_lunar_eclipse.datestamp, null, 2).replace(/["']/g, "");
+        if (el) el.textContent += "\n";
+        if (el) el.textContent += "My Local Time: ";
+        if (el) el.textContent += theDate2.toLocaleString();
+        })
+        .catch(function (err) {
+        console.error("Error:", err.message);
+        });;
 
 
         });
