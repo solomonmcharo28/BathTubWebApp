@@ -163,6 +163,20 @@ function geocodeWithMapbox(address) {
         if (el) el.textContent += "\n";
         if (el) el.textContent += JSON.stringify(data.moon.next_lunar_eclipse.datestamp, null, 2).replace(/["']/g, "");
         if (el) el.textContent += "\n";
+		if (el) el.textContent += "Current Moon Phase: ";
+        if (el) el.textContent += "\n";
+        if (el) el.textContent += JSON.stringify(data.moon.phase_name, null, 2).replace(/["']/g, "");
+        if (el) el.textContent += "\n";
+        if (el) el.textContent += JSON.stringify(data.moon.major_phase, null, 2).replace(/["']/g, "");
+        if (el) el.textContent += "\n";
+        if (el) el.textContent += JSON.stringify(data.moon.stage, null, 2).replace(/["']/g, "");
+        if (el) el.textContent += "\n";
+        if (el) el.textContent += JSON.stringify(data.moon.illumination, null, 2).replace(/["']/g, "");
+        if (el) el.textContent += "\n";
+        if (el) el.textContent += JSON.stringify(data.moon.lunar_cycle, null, 2).replace(/["']/g, "");
+        if (el) el.textContent += "\n";
+        if (el) el.textContent += JSON.stringify(data.moon.emoji, null, 2).replace(/["']/g, "");
+        if (el) el.textContent += "\n";
         if (el) el.textContent += "My Local Time: ";
         if (el) el.textContent += theDate2.toLocaleString();
         })
