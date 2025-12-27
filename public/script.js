@@ -11,25 +11,6 @@ async function loadConfig() {
 }
 loadConfig();
 
-(async function getMoonPhaseFast() {
-const url = 'https://moon-phase.p.rapidapi.com/calendar?format=html';
-const options = {
-	method: 'GET',
-	headers: {
-		'x-rapidapi-key': moonPhaseToken,
-		'x-rapidapi-host': 'moon-phase.p.rapidapi.com'
-	}
-};
-
-try {
-	const response = await fetch(url, options);
-	const result = await response.text();
-	//console.log(result);
-} catch (error) {
-	//console.error(error);
-}
-})();
-
   function getMoonPhase(lat, lon) {
     //console.log("moonphase request made");
     var url =
