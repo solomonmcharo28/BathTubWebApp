@@ -1,5 +1,7 @@
-var moonPhaseToken =  process.env.moonPhaseToken;
-var mapboxToken = process.env.mapboxToken;
+const config = await fetch("/api/config").then(r => r.json());
+
+var moonPhaseToken =  config.moonPhaseToken;
+var mapboxToken = config.mapboxToken
 
 
 (async function getMoonPhaseFast() {
