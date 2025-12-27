@@ -1,7 +1,7 @@
 const config = await fetch("/api/config").then(r => r.json());
 
 var moonPhaseToken =  config.moonPhaseToken;
-var mapboxToken = config.mapboxToken
+var mapboxToken = config.mapboxToken;
 
 
 (async function getMoonPhaseFast() {
