@@ -126,8 +126,8 @@ function geocodeWithMapbox(address) {
 
         await getMoonPhase(locationData.lat, locationData.lon)
         .then(function (data) {
-		//console.log("Location API response:", locationData);
-        //console.log("Moon API response:", data);
+		console.log("Location API response:", locationData);
+        console.log("Moon API response:", data);
         var solarTimestamp = data.sun.next_solar_eclipse.timestamp;
         const theDate = new Date(solarTimestamp * 1000);
         var lunarTimestamp = data.moon.next_lunar_eclipse.timestamp;
