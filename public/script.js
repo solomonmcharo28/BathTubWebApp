@@ -12,7 +12,7 @@ async function loadConfig() {
 loadConfig();
 
   function getMoonPhase(lat, lon) {
-    //console.log("moonphase request made");
+    console.log("moonphase request made");
     var url =
       "https://" +
       'moon-phase.p.rapidapi.com' +
@@ -107,7 +107,7 @@ function geocodeWithMapbox(address) {
     form.addEventListener("submit", async (e) => {
         e.preventDefault();  
         const address = document.getElementById("address").value;
-        //console.log("Address Response", address);
+        console.log("Address Response", address);
 
         const locationData = await geocodeWithMapbox(address)
         .then(function (data) {
@@ -120,7 +120,7 @@ function geocodeWithMapbox(address) {
         return data;
         })
         .catch(function (err) {
-        //console.error("Error:", err.message);
+        console.error("Error:", err.message);
         });;
         //console.log("Location API Response", locationData);
 
@@ -164,7 +164,7 @@ function geocodeWithMapbox(address) {
 		if (el) el.textContent += "\n";
         })
         .catch(function (err) {
-        //console.error("Error:", err.message);
+        console.error("Error:", err.message);
         });;
 
 
