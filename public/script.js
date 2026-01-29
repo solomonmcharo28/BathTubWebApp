@@ -128,23 +128,23 @@ function geocodeWithMapbox(address) {
         .then(function (data) {
 		console.log("Location API response:", locationData);
         console.log("Moon API response:", data);
-        var solarTimestamp = data.sun.next_solar_eclipse.timestamp;
-        const theDate = new Date(solarTimestamp * 1000);
-        var lunarTimestamp = data.moon.next_lunar_eclipse.timestamp;
-        const theDate2 = new Date(lunarTimestamp * 1000)
+        //var solarTimestamp = data.sun.next_solar_eclipse.timestamp;
+        //const theDate = new Date(solarTimestamp * 1000);
+        //var lunarTimestamp = data.moon.next_lunar_eclipse.timestamp;
+        //const theDate2 = new Date(lunarTimestamp * 1000)
         // If you have a <pre id="result"></pre> in HTML:
         var el = document.getElementById("result");
-        if (el) el.textContent += JSON.stringify(data.sun.next_solar_eclipse.type, null, 2).replace(/["']/g, "");
-        if (el) el.textContent += "\n";
-        if (el) el.textContent += JSON.stringify(data.sun.next_solar_eclipse.datestamp, null, 2).replace(/["']/g, "");
-        if (el) el.textContent += "\n";
-        if (el) el.textContent += "My Local Time: ";
-        if (el) el.textContent += theDate.toLocaleString();
-        if (el) el.textContent += "\n";
-        if (el) el.textContent += JSON.stringify(data.moon.next_lunar_eclipse.type, null, 2).replace(/["']/g, "");
-        if (el) el.textContent += "\n";
-        if (el) el.textContent += JSON.stringify(data.moon.next_lunar_eclipse.datestamp, null, 2).replace(/["']/g, "");
-        if (el) el.textContent += "\n";
+       // if (el) el.textContent += JSON.stringify(data.sun.next_solar_eclipse.type, null, 2).replace(/["']/g, "");
+        //if (el) el.textContent += "\n";
+       // if (el) el.textContent += JSON.stringify(data.sun.next_solar_eclipse.datestamp, null, 2).replace(/["']/g, "");
+       // if (el) el.textContent += "\n";
+    //if (el) el.textContent += "My Local Time: ";
+     //   if (el) el.textContent += theDate.toLocaleString();
+       // if (el) el.textContent += "\n";
+      //  if (el) el.textContent += JSON.stringify(data.moon.next_lunar_eclipse.type, null, 2).replace(/["']/g, "");
+       // if (el) el.textContent += "\n";
+       // if (el) el.textContent += JSON.stringify(data.moon.next_lunar_eclipse.datestamp, null, 2).replace(/["']/g, "");
+       // if (el) el.textContent += "\n";
 		if (el) el.textContent += "Current Moon Phase: ";
         if (el) el.textContent += "\n";
         if (el) el.textContent += JSON.stringify(data.moon.phase_name, null, 2).replace(/["']/g, "");
@@ -159,8 +159,8 @@ function geocodeWithMapbox(address) {
         if (el) el.textContent += "\n";
         if (el) el.textContent += JSON.stringify(data.moon.emoji, null, 2).replace(/["']/g, "");
         if (el) el.textContent += "\n";
-        if (el) el.textContent += "My Local Time: ";
-        if (el) el.textContent += theDate2.toLocaleString();
+      //  if (el) el.textContent += "My Local Time: ";
+      //  if (el) el.textContent += theDate2.toLocaleString();
 		if (el) el.textContent += "\n";
         })
         .catch(function (err) {
